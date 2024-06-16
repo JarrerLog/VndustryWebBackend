@@ -1,0 +1,47 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.0'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.vndustrybackend'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven{ url "https://www.jitpack.io"}
+	    maven{ url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+}
+
+ext {
+	mindustryVersion = 'v145'
+	jabelVersion = "93fde537c7"
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-web-services'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation  "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+    implementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
+	implementation "com.github.Anuken:jabel:$jabelVersion"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
